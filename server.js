@@ -15,7 +15,6 @@ server.get("/", (req, res) => {
 const time = new Date().toLocaleString();
 
 function logger(req, res, next) {
-  console.log(req);
   console.log(`${req.method} to ${req.originalUrl} at ${time}`);
   next();
 }

@@ -69,16 +69,10 @@ router.put("/:id", validateUser, validateUserId, (req, res) => {
   const body = req.body;
   Users.update(id, body)
     .then(user => {
-      if (user) {
-        res.status(201).json({ message: "user has been updated", user });
-      }
-      // else {
-      //   res
-      //     .status(404)
-      //     .json({ message: "The user with the specified ID does not exist." });
-      // }
+      res.status(200).json({ message: "user has been updated", user });
     })
     .catch(err => {
+      console.log(err);
       res
         .status(500)
         .json({ error: "The user information could not be modified." });
@@ -88,7 +82,6 @@ router.put("/:id", validateUser, validateUserId, (req, res) => {
 //custom middleware
 
 function validateUserId(req, res, next) {
-  console.log("id: ", req.params.id);
   Users.getById(req.params.id)
     .then(user => {
       if (user) {
